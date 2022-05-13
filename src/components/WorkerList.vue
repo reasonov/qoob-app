@@ -109,10 +109,12 @@ export default {
 
 <style scoped>
 .worker__header {
+  max-width: 375px;
   padding: 10px;
   margin: 0 auto;
 
   overflow-x: scroll;
+  box-sizing: border-box;
   background-color: #fff;
 }
 
@@ -143,9 +145,7 @@ export default {
 
   padding: 10px 0;
 
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 15px;
+  font-size: 14px;
 }
 
 .services--active::after {
@@ -195,12 +195,8 @@ export default {
 }
 
 .card__text1 {
-  margin-bottom: 5px;
-
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 15px;
-  color: #939395;
+  font-size: 11px;
+  line-height: 11px;
 }
 
 .card__rate {
@@ -216,6 +212,7 @@ export default {
 }
 
 .rate-number {
+  margin-top: 2px;
   font-size: 18px;
   font-weight: 500;
 }
@@ -223,7 +220,7 @@ export default {
 .rate-star {
   width: 22px;
   height: 22px;
-  margin-right: 5px;
+  margin-right: 9px;
 }
 
 .service__border {

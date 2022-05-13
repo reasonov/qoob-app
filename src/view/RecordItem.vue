@@ -68,7 +68,7 @@
             <p class="item__text">Оплатить запись</p>
           </div>
           <div class="payment__wrapper">
-            <p class="payment__price">{{ fullPrice }} ₽</p>
+            <p class="payment__price circle-number">{{ fullPrice }} ₽</p>
             <img src="../assets/img/arrow-right.svg" alt="">
           </div>
         </div>
@@ -295,13 +295,7 @@ export default {
 }
 
 .payment__price {
-  padding: 0 12px;
   margin-right: 15px;
-
-  border-radius: 31px;
-
-  font-size: 12px;
-  line-height: 24px;
 
   background-color: #F0F3F8;
 }

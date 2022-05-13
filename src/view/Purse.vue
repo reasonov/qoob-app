@@ -215,14 +215,14 @@ export default {
   content: '';
   position: absolute;
   top: -71px;
-  left: -18px;
+  left: -15px;
   z-index: -1;
 
   width: 85px;
   height: 125px;
   border-radius: 0 0 6px 6px;
 
-  background-color: #FFC549;
+  background-color: #B4F7FC;
 }
 
 .card__text {

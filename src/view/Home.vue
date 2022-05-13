@@ -28,8 +28,8 @@
                 <p class="link__text">{{ item.text }}</p>
               </div>
               <div class="content-wrapper">
-                <span class="circle-number" v-if="item.text === 'Кошелек'">2500</span>
-                <span class="circle-comments" v-else-if="item.text === 'Отзывы'">124</span>
+                <span class="circle-number1 circle-number" v-if="item.text === 'Кошелёк'">2500</span>
+                <span class="circle-comments circle-number" v-else-if="item.text === 'Отзывы'">124</span>
                 <span class="language" v-else-if="item.text === 'Язык'">{{ store.state.language }}</span>
                 <img src="../assets/img/arrow-right.svg" alt="">
               </div>
@@ -85,7 +85,7 @@ export default {
     const navBottomList = [
       [
         {
-          text: 'Кошелек',
+          text: 'Кошелёк',
           image: 'card-tick',
           link: '/purse'
         }
@@ -134,8 +134,10 @@ export default {
   display: flex;
   align-items: center;
 
+  max-width: 375px;
   padding: 15px 20px;
   margin: 0 auto;
+  box-sizing: border-box;
 
   background-color: #F6F9FC;
 }
@@ -194,7 +196,6 @@ export default {
 
   width: 100%;
   height: 100%;
-  opacity: 0.5;
 
   font-size: 10px;
   line-height: 10px;
@@ -228,34 +229,17 @@ export default {
 .link__text {
   margin-left: 15px;
 
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 15px;
 }
 
-.circle-number {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 22px;
+.circle-number1 {
   margin-right: 15px;
-  padding: 0 8px;
-
-  border-radius: 31px;
-
-  font-size: 12px;
 
   background-color: #FED47A;
 }
 
 .circle-comments {
-  padding: 0 6px;
   margin-right: 15px;
-
-  border-radius: 31px;
-
-  font-size: 12px;
-  line-height: 24px;
 
   background-color: #F0F3F8;
 }

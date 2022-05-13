@@ -5,11 +5,11 @@
         <div class="card__background" :style="'background-image: url(' + require('../assets/img/' + data.image + '.png') + ')'">
           <div>
             <p class="background__text">Сертификат</p>
-            <p class="background__price">{{ data.price }}₽</p>
+            <p class="background__price">{{ data.price }} ₽</p>
           </div>
         </div>
         <div class="card__bottom">
-          <p class="card__price">{{ data.price }}₽</p>
+          <p class="card__price">{{ data.price }} ₽</p>
           <p class="card__name">{{ data.name }}</p>
         </div>
       </div>
@@ -54,7 +54,6 @@ export default {
 }
 
 .card {
-  padding: 10px;
   margin-bottom: 10px;
 
   border-radius: 16px;
@@ -92,8 +91,7 @@ export default {
 }
 
 .card__bottom {
-  padding-top: 20px;
-  padding-left: 20px;
+  padding: 20px;
 }
 
 .card__price {

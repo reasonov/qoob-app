@@ -93,11 +93,15 @@ export default {
   height: 50px;
   padding: 0 15px;
   box-sizing: border-box;
+
+  font-size: 14px;
+  color: #000;
 }
 
 .profile__edit {
   width: 50px;
   height: 50px;
+  opacity: 0.4;
 }
 
 .save-button {

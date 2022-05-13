@@ -36,14 +36,14 @@
                 </div>
               </div>
               <div class="item__wrapper">
-                <p class="record__price">{{ fullPrice(index) }} ₽</p>
+                <p class="record__price circle-number">{{ fullPrice(index) }} ₽</p>
                 <img src="../assets/img/arrow-right.svg" alt="" class="record__arrow">
               </div>
             </router-link>
           </li>
         </ul>
 
-        <p class="record__date">21:10:2022</p>
+        <p class="record__date">21 мая, пт</p>
         <ul class="record__list">
           <li class="record__item">
             <router-link class="record__link" to="/record/3">
@@ -54,7 +54,7 @@
                 </div>
               </div>
               <div class="item__wrapper">
-                <p class="record__price">2 500 ₽</p>
+                <p class="record__price circle-number">2 500 ₽</p>
                 <img src="../assets/img/arrow-right.svg" alt="" class="record__arrow">
               </div>
             </router-link>
@@ -228,12 +228,7 @@ export default {
 }
 
 .record__price {
-  padding: 0 12px;
   margin-right: 15px;
-  border-radius: 31px;
-
-  font-size: 12px;
-  line-height: 24px;
 
   background-color: #F0F3F8;
 }

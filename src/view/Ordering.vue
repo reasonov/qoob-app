@@ -7,7 +7,7 @@
           <img src="../assets/img/appointment-emoji1.svg" alt="">
           <div class="item__wrapper">
             <p class="item__name">Сотрудник</p>
-            <p class="item__selected">{{ store.state.appointmentData.name }}</p>
+            <p class="item__selected circle-number">{{ store.state.appointmentData.name }}</p>
           </div>
         </li>
 
@@ -15,7 +15,7 @@
           <img class="emoji" src="../assets/img/appointment-emoji2.svg" alt="">
           <div class="item__wrapper">
             <p class="item__name">Дата и Время</p>
-            <p class="item__selected">{{ store.state.appointmentData.date }}</p>
+            <p class="item__selected circle-number">{{ store.state.appointmentData.date }}</p>
           </div>
         </li>
 
@@ -23,7 +23,7 @@
           <img class="emoji" src="../assets/img/appointment-emoji3.svg" alt="">
           <div class="item__wrapper item__wrapper--last">
             <p class="item__name">Услуги</p>
-            <p class="item__selected">{{ store.state.appointmentData.price }} ₽</p>
+            <p class="item__selected circle-number">{{ store.state.appointmentData.price }} ₽</p>
           </div>
         </li>
 
@@ -45,7 +45,7 @@
           <p class="ordering__item-title item__title">Напомнить за</p>
         </div>
         <div class="item__right">
-          <p class="clock-number">{{ notificationList[selectedNotification] }} часа</p>
+          <p class="clock-number circle-number">{{ notificationList[selectedNotification] }} часа</p>
           <img src="../assets/img/arrow-right.svg" alt="">
         </div>
       </div>
@@ -126,7 +126,7 @@ export default {
     const notificationList = ['1', '2', '3', '5', '8', '10', '12', '24'];
     const selectedNotification = ref(1);
 
-    const agreementState = reactive({first: true, second: true});
+    const agreementState = reactive({first: false, second: false});
 
     const orderState = ref(false);
 
@@ -210,12 +210,8 @@ export default {
 }
 
 .item__selected {
-  padding: 5px 10px;
+  padding: 0 12px;
   margin-right: 5px;
-  border-radius: 15px;
-
-  font-size: 12px;
-  font-weight: 500;
 
   background-color: #F0F3F8;
 }
@@ -249,10 +245,6 @@ export default {
 .clock-number {
   padding: 0 12px;
   margin-right: 15px;
-  border-radius: 31px;
-
-  font-size: 12px;
-  line-height: 24px;
 
   background-color: #F0F3F8;
 }
@@ -307,6 +299,8 @@ export default {
   width: 100%;
   height: 50px;
   border-radius: 12px;
+
+  font-size: 16px;
 
   background-color: #FFC549;
 }

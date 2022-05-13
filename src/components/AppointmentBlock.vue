@@ -8,7 +8,7 @@
           <div class="item__wrapper">
             <p class="item__name">Сотрудник</p>
             <div class="item__right">
-              <p class="item__selected" v-if="store.state.appointmentData.name">{{ store.state.appointmentData.name }}</p>
+              <p class="item__selected circle-number" v-if="store.state.appointmentData.name">{{ store.state.appointmentData.name }}</p>
               <img src="../assets/img/arrow-right.svg" alt="">
             </div>
           </div>
@@ -21,7 +21,7 @@
           <div class="item__wrapper">
             <p class="item__name">Дата и Время</p>
             <div class="item__right">
-              <p class="item__selected" v-if="store.state.appointmentData.date">{{ store.state.appointmentData.date }} {{ store.state.appointmentData.time }}</p>
+              <p class="item__selected circle-number" v-if="store.state.appointmentData.date">{{ store.state.appointmentData.date }} {{ store.state.appointmentData.time }}</p>
               <img src="../assets/img/arrow-right.svg" alt="">
             </div>
           </div>
@@ -34,7 +34,7 @@
           <div class="item__wrapper item__wrapper--last">
             <p class="item__name">Услуги</p>
             <div class="item__right">
-              <p class="item__selected" v-if="store.state.appointmentData.price">{{ store.state.appointmentData.price }} ₽</p>
+              <p class="item__selected circle-number" v-if="store.state.appointmentData.price">{{ store.state.appointmentData.price }} ₽</p>
               <img src="../assets/img/arrow-right.svg" alt="">
             </div>
           </div>
@@ -76,9 +76,10 @@ export default {
   z-index: 2;
 
   width: 100%;
-  padding: 10px 15px;
+  max-width: 375px;
+  padding: 10px;
 
-  border-top: 1px solid #B1B1B1;
+  box-shadow: 0px -1px 0px rgba(41, 45, 50, 0.1);
   box-sizing: border-box;
   border-radius: 8px 8px 0 0;
   transform: translateX(-50%);
@@ -132,12 +133,8 @@ export default {
 }
 
 .item__selected {
-  padding: 5px 10px;
+  padding: 0 12px;
   margin-right: 5px;
-  border-radius: 15px;
-
-  font-size: 12px;
-  font-weight: 500;
 
   background-color: #F0F3F8;
 }

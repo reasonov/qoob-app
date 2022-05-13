@@ -94,6 +94,7 @@ export default {
 }
 
 .about__wrapper {
+  max-width: 375px;
   padding: 70px 20px 130px 20px;
   margin: 0 auto;
 
@@ -115,8 +116,13 @@ export default {
 
 .about__logo {
   position: absolute;
-  top: -115px;
+  top: -112px;
   left: 50%;
+
+  width: 76px;
+  height: 76px;
+  border: 4px solid #FFC549;
+  border-radius: 50%;
 
   transform: translateX(-50%);
 }
@@ -139,11 +145,17 @@ export default {
   justify-content: center;
   align-items: center;
 
+  width: 70px;
+  height: 30px;
+  margin: 0 auto;
   margin-top: 10px;
+  border-radius: 21px;
+
+  background-color: #F6F9FC;
 }
 
 .rate__number {
-  margin-left: 5px;
+  margin-left: 9px;
   opacity: 0.8;
 
   font-size: 16px;

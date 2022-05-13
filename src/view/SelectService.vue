@@ -24,10 +24,10 @@
 
               <div class="item__header">
                 <p class="item__title">{{ service.title }}</p>
-                <p class="item__time">{{ service.time }}</p>
+                <p class="item__time circle-number">{{ service.time }}</p>
               </div>
               <div class="item__main">
-                <button class="item__more" @click="moreState = index">Подробнее</button>
+                <button :class="['item__more', {'item__more--active': service.state}]" @click="moreState = index">Подробнее</button>
                 <div class="main__right">
                   <p class="item__price">{{ service.price }} ₽</p>
 
@@ -46,26 +46,28 @@
         </ul>
       </transition>
 
-      <div class="modal-more" v-if="moreState !== -1">
-        <div class="more__header">
-          <p class="more__caption">Об услуге</p>
-          <p class="more__title">{{ filteredList[moreState].title }}</p>
-          <p class="more__subtitle">Основные услуги</p>
-          <button class="more__close" @click="moreState = -1">
-            <img src="../assets/img/close-icon.svg" alt="">
-          </button>
+      <transition name="modalAm">
+        <div class="modal-more" v-if="moreState !== -1">
+          <div class="more__header">
+            <p class="more__caption">Об услуге</p>
+            <p class="more__title">{{ filteredList[moreState].title }}</p>
+            <p class="more__subtitle">Основные услуги</p>
+            <button class="more__close" @click="moreState = -1">
+              <img src="../assets/img/close-icon.svg" alt="">
+            </button>
+          </div>
+
+          <p class="title--small">Об услуге</p>
+          <p class="more__about">
+            Вы в любой момент можете прервать сронизацию, нажав на кнопку отключить.
+            При тключении синхронизации будет остановлен модуль RFM анализа, отправка
+            уведомлений по всем каналам, запись через мобильное приложение qoob будет ограничена.
+            Вы в любой момент можете прервать сронизацию, нажав на кнопку.
+          </p>
+
+          <div class="more__image"></div>
         </div>
-
-        <p class="title--small">Об услуге</p>
-        <p class="more__about">
-          Вы в любой момент можете прервать сронизацию, нажав на кнопку отключить.
-          При тключении синхронизации будет остановлен модуль RFM анализа, отправка
-          уведомлений по всем каналам, запись через мобильное приложение qoob будет ограничена.
-          Вы в любой момент можете прервать сронизацию, нажав на кнопку.
-        </p>
-
-        <div class="more__image"></div>
-      </div>
+      </transition>
 
     </div>
 
@@ -374,11 +376,6 @@ export default {
 
 .item__time {
   padding: 0 12px;
-  border-radius: 31px;
-
-  font-size: 12px;
-  line-height: 24px;
-
   background-color: #F0F3F8;
 }
 
@@ -396,6 +393,11 @@ export default {
   border: 1px solid #FED47A;
 
   font-size: 12px;
+}
+
+.item__more--active {
+  border: none;
+  background-color: #F0F3F8;
 }
 
 .main__right {
@@ -481,6 +483,14 @@ export default {
     opacity: 0;
     overflow: hidden;
   }
+}
+
+.modalAm-enter-active, .modalAm-leave-active {
+  transition: .7s all ease;
+}
+
+.modalAm-enter-from, .modalAm-leave-to {
+  bottom: -800px;
 }
 
 </style>
