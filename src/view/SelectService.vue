@@ -69,6 +69,10 @@
         </div>
       </transition>
 
+      <transition name="bgAm">
+        <div class="modal__background" @touchstart="moreState = -1" v-if="moreState !== -1"></div>
+      </transition>
+
     </div>
 
     <appointment-block link="/ordering" />
@@ -147,9 +151,10 @@ export default {
         price.value += item.price;
         arr.push(new Service(item.title, item.price));
       } else {
-        if(arr.includes(item.title)) {
+        if(arr.some(el => el.name === item.title)) {
           const id = arr.indexOf(item.title);
           arr.splice(id, 1);
+          price.value -= item.price;
         }
       }
 
@@ -175,7 +180,7 @@ export default {
   z-index: 5;
 
   width: 100%;
-  max-width: 370px;
+  max-width: 375px;
   padding: 20px;
 
   border-radius: 30px 30px 0 0;
@@ -244,9 +249,10 @@ export default {
   display: flex;
   align-items: center;
 
+  max-width: 355px;
   height: 35px;
   padding: 0 15px;
-  margin: 10px;
+  margin: 10px auto;
 
   border-radius: 74px;
   box-sizing: border-box;
@@ -326,11 +332,15 @@ export default {
 .services__item {
   margin-top: 10px;
   border-radius: 8px;
+
+  transition: .1s all ease;
+  border: 0 solid #FFC549;
 }
 
 .item__wrapper {
   padding: 20px;
   border-radius: 8px;
+  transition: .1s all ease;
 
   background-color: #fff;
 }
@@ -342,21 +352,32 @@ export default {
 .item--active {
   position: relative;
   z-index: 2;
-  border: 1px solid #FFC549;
 }
 
-.item--active::after {
+.item--active::before {
   content: '';
   position: absolute;
-  left: -5px;
-  top: -1px;
-  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 
-  width: 10px;
-  height: calc(100% + 2px);
-  border-radius: 6px 0 0 6px;
+  border-radius: 9px 6px 6px 9px;
+  border: 1px solid #FFC549;
+  border-left: 5px solid #FFC549;
+  animation: .1s itemKeys ease;
+}
 
-  background-color: #FFC549;
+@keyframes itemKeys {
+  0% {
+    border: 0 solid #FFC549;
+    opacity: 0;
+  }
+  100% {
+    border: 1px solid #FFC549;
+    border-left: 5px solid #FFC549;
+    opacity: 1;
+  }
 }
 
 .item__header {
@@ -491,6 +512,14 @@ export default {
 
 .modalAm-enter-from, .modalAm-leave-to {
   bottom: -800px;
+}
+
+.bgAm-enter-active, .bgAm-leave-active {
+  transition: .7s all ease;
+}
+
+.bgAm-enter-from, .bgAm-leave-to {
+  opacity: 0;
 }
 
 </style>

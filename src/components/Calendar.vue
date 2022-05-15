@@ -4,21 +4,30 @@
     <ul class="calendar__week">
       <li class="week__item" v-for="item in weekList" :key="item">{{ item }}</li>
     </ul>
-    <ul class="calendar__day">
-      <li class="null-slot" v-for="i in dayStart" :key="i"></li>
-      <li class="day__item" v-for="day in daysInMonth" :key="day">
-        <button :class="[
+
+    <div class="day-wrapper">
+      <ul :class="[
+          'calendar__day',
+           {'calendar--animation1': scrollState === 1},
+           {'calendar--animation2': scrollState === 2},
+           {'calendar--animation3': scrollState === 3}
+          ]"
+      >
+        <li class="null-slot" v-for="i in dayStart" :key="i"></li>
+        <li class="day__item" v-for="day in daysInMonth" :key="day">
+          <button :class="[
             'day__wrapper',
             {'day--select': day === selectedDay},
-            {'today': day === currentDay && selectedDay !== currentDay}
+            {'today': day === currentDay && selectedDay !== currentDay && currentMonth === changedMonth}
             ]"
-                :disabled="day < currentDay"
-                @click="selectDay(day)"
-        >
-          {{ day }}
-        </button>
-      </li>
-    </ul>
+                  :disabled="day < currentDay && currentMonth === changedMonth"
+                  @click="selectDay(day)"
+          >
+            {{ day }}
+          </button>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -34,33 +43,40 @@ export default {
     const date = new Date();
     const currentDay = date.getDate();
     const currentMonth = ref(date.getMonth() + 1);
+    const changedMonth = ref(date.getMonth() + 1);
     const currentYear = ref(date.getFullYear());
 
     const dayStart = computed(() => {
-      return new Date(currentYear.value, currentMonth.value - 1, 0).getDay()
+      return new Date(currentYear.value, changedMonth.value - 1, 0).getDay()
     })
 
     const selectedDay = ref(currentDay);
 
     const daysInMonth = computed(() => {
-      return new Date(currentYear.value, currentMonth.value, 0).getDate();
+      return new Date(currentYear.value, changedMonth.value, 0).getDate();
     })
 
     function selectDay(day) {
       selectedDay.value = day;
 
-      let month = currentMonth.value;
-      if(String(currentMonth.value).length < 2) {
-        month = '0' + currentMonth.value;
+      emitDate();
+    }
+
+    function emitDate() {
+      let month = changedMonth.value;
+      if(String(changedMonth.value).length < 2) {
+        month = '0' + changedMonth.value;
       }
 
       const value = selectedDay.value + '.' + month + '.' + currentYear.value;
 
       emit('newDate', value)
     }
+    emitDate();
 
     const firstTouch = ref(0);
     const scrollThrow = ref(false);
+    const scrollState = ref(0);
 
     function scrollCalendar(e) {
 
@@ -71,13 +87,44 @@ export default {
       if(firstTouch.value === 0) {
         firstTouch.value = e.touches[0].screenY;
       } else if(firstTouch.value - e.touches[0].screenY >= 20) {
-        changeMonth('plus');
+
+        scrollState.value = 1;
+
+        setTimeout(() => {
+          scrollState.value = 2;
+        }, 300)
+
+        setTimeout(() => {
+          changeMonth('plus');
+          scrollState.value = 3;
+        }, 400)
+
         firstTouch.value = 0;
         scrollThrow.value = true;
+
+        setTimeout(() => {
+          scrollState.value = 0;
+        }, 500)
+
       } else if(firstTouch.value - e.touches[0].screenY <= -20) {
-        changeMonth('minus');
+
+        scrollState.value = 3;
+
+        setTimeout(() => {
+          scrollState.value = 2;
+        }, 300)
+
+        setTimeout(() => {
+          changeMonth('minus');
+          scrollState.value = 1;
+        }, 400)
+
         firstTouch.value = 0;
         scrollThrow.value = true;
+
+        setTimeout(() => {
+          scrollState.value = 0;
+        }, 500)
       }
     }
 
@@ -87,24 +134,24 @@ export default {
 
     function changeMonth(side) {
       if(side === 'plus') {
-        if(currentMonth.value === 11) {
+        if(changedMonth.value === 11) {
           currentYear.value += 1;
-          currentMonth.value = 0;
+          changedMonth.value = 0;
         } else {
-          currentMonth.value += 1;
+          changedMonth.value += 1;
         }
       } else {
-        if(currentMonth.value === 0) {
+        if(changedMonth.value === 0) {
           currentYear.value -= 1;
-          currentMonth.value = 11;
+          changedMonth.value = 11;
         } else {
-          currentMonth.value -= 1;
+          changedMonth.value -= 1;
         }
       }
     }
 
     const translateMonth = computed(() => {
-      const month = new Date(currentYear.value, currentMonth.value - 1);
+      const month = new Date(currentYear.value, changedMonth.value - 1);
       return month.toLocaleString('default', { month: 'long' })
     })
 
@@ -113,10 +160,13 @@ export default {
       daysInMonth,
       currentDay,
       selectedDay,
+      currentMonth,
+      changedMonth,
       dayStart,
       selectDay,
       scrollCalendar,
       stopScroll,
+      scrollState,
       translateMonth
     }
 
@@ -162,12 +212,24 @@ export default {
   color: #979797;
 }
 
+.day-wrapper {
+  position: relative;
+  height: 295px;
+  overflow: hidden;
+}
+
 .calendar__day {
+  position: absolute;
+  top: 0;
+  left: 0;
+
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-row-gap: 15px;
 
+  width: 100%;
   margin-top: 25px;
+  transition: .5s all ease;
 }
 
 .day__item {
@@ -206,5 +268,17 @@ export default {
   border: 1px solid #FED47A;
 
   background-color: #fff;
+}
+
+.calendar--animation1 {
+  top: -100%;
+}
+
+.calendar--animation2 {
+  display: none;
+}
+
+.calendar--animation3 {
+  top: 100%;
 }
 </style>

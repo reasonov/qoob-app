@@ -49,10 +49,10 @@ export default {
     const editItem = ref(0);
 
     const profileData = reactive({
-      name: 'Мария',
-      lastName: 'Шарапова',
-      phone: '+7 918 340 22 31',
-      email: 'example@mail.com'
+      name: '',
+      lastName: '',
+      phone: '',
+      email: ''
     })
 
     function goBack() {

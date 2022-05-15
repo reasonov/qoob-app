@@ -83,7 +83,6 @@
 
     <div class="modal-wrapper">
       <modal-bottom class="about__modal2" :state="modalState">
-        <p class="modal__title">Поздравляем!</p>
         <p class="modal__subtitle">Ваш отзыв опубликован!</p>
         <router-link class="modal__button" to="/">На главную</router-link>
       </modal-bottom>
@@ -289,7 +288,7 @@ export default {
 .about__modal2 {
   z-index: 5;
 
-  height: 200px;
+  height: 155px;
   padding: 25px;
   padding-top: 35px;
   box-sizing: border-box;
@@ -309,14 +308,6 @@ export default {
   font-size: 16px;
 
   background-color: #FFC549;
-}
-
-.modal__title {
-  margin-bottom: 20px;
-
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 19px;
 }
 
 .modal__subtitle {

@@ -287,23 +287,16 @@ export default createStore({
         },
         updateAppointment(state, data) {
             if(data.item === 'name') {
-                console.log('name')
                 state.appointmentData.id = data.value;
                 state.appointmentData[data.item] = state.workerList[data.value].name;
             } else if(data.item === 'date') {
-
-                console.log('date')
                 state.appointmentData.date = data.value.date;
                 state.appointmentData.time = data.value.time;
-
             } else if(data.item === 'price') {
-                console.log('price')
                 state.appointmentData[data.item] = data.value;
             } else if(data.item === 'service') {
-                console.log('service')
                 state.appointmentData.services = data.value;
             } else {
-                console.log('else')
                 state.appointmentData.name = data.name;
                 state.appointmentData.date = data.date;
                 state.appointmentData.time = data.time;

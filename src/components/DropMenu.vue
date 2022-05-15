@@ -4,10 +4,15 @@
 
     <div class="drop-menu">
 
-      <div class="drop__block" @click="toggleMenu">
+      <div :class="['drop__block', {'drop__block--active': menuState}]" @click="toggleMenu">
         <p class="drop__text" v-if="!selectedItem">Выберите</p>
         <p class="drop__text" v-else>{{ selectedItem }}</p>
-        <img :class="['drop__arrow', {'arrow--active': menuState}]" src="../assets/img/arrow-right.svg" alt="">
+
+        <div class="drop__right">
+          <span class="drop__line"></span>
+
+          <img :class="['drop__arrow', {'arrow--active': menuState}]" src="../assets/img/arrow-right.svg" alt="">
+        </div>
       </div>
 
       <transition name="dropAm">
@@ -85,9 +90,26 @@ export default {
   background-color: #F6F9FC;
 }
 
+.drop__block--active {
+  border-radius: 6px 6px 0 0;
+}
+
 .drop__text {
-  opacity: 0.6;
   font-size: 14px;
+}
+
+.drop__right {
+  display: flex;
+  align-items: center;
+}
+
+.drop__line {
+  width: 1px;
+  height: 24px;
+  margin-right: 15px;
+  opacity: 0.1;
+
+  background-color: #000000;
 }
 
 .drop__arrow {
@@ -106,11 +128,13 @@ export default {
   z-index: 5;
 
   width: 100%;
+  height: 160px;
   padding: 15px;
   padding-top: 0;
 
   box-sizing: border-box;
   border-radius: 0 0 6px 6px;
+  overflow-y: scroll;
 
   background-color: #F6F9FC;
 }
@@ -118,17 +142,28 @@ export default {
 .drop__item {
   width: 100%;
   height: 48px;
-  border-bottom: 1px solid #e2e2e2;
 
   text-align: left;
 }
 
-.dropAm-enter-active, .dropAm-leave-active {
-  transition: .3s all ease;
+.dropAm-enter-active {
+  animation: .3s dropKeys ease reverse;
 }
 
-.dropAm-enter-from, .dropAm-leave-to {
-  top: 0;
-  opacity: 0;
+.dropAm-leave-active {
+  animation: .3s dropKeys ease;
+}
+
+@keyframes dropKeys {
+  0% {
+    height: 160px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+  }
+  100% {
+    height: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+  }
 }
 </style>

@@ -151,8 +151,7 @@ export default {
   border-radius: 12px;
   box-sizing: border-box;
 
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 16px;
 
   background-color: #FFC549;
 }
