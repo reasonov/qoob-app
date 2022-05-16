@@ -25,7 +25,7 @@ export default {
   bottom: 0;
 
   width: 100%;
-  max-width: 375px;
+  max-width: 768px;
   box-sizing: border-box;
 
   border-radius: 24px 24px 0 0;

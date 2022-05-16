@@ -128,7 +128,7 @@ export default {
 }
 
 .about__wrapper {
-  max-width: 375px;
+  max-width: 768px;
   padding: 70px 20px 130px 20px;
   margin: 0 auto;
 

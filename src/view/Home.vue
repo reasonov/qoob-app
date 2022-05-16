@@ -134,7 +134,7 @@ export default {
   display: flex;
   align-items: center;
 
-  max-width: 375px;
+  max-width: 768px;
   padding: 15px 20px;
   margin: 0 auto;
   box-sizing: border-box;

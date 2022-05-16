@@ -109,7 +109,7 @@ export default {
 
 <style scoped>
 .worker__header {
-  max-width: 375px;
+  max-width: 768px;
   padding: 10px;
   margin: 0 auto;
 

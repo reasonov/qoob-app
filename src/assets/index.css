@@ -20,7 +20,7 @@ button {
 }
 
 .wrapper {
-    max-width: 375px;
+    max-width: 768px;
     padding: 10px;
     margin: 0 auto;
     box-sizing: border-box;

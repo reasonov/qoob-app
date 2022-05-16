@@ -76,7 +76,7 @@ export default {
   z-index: 2;
 
   width: 100%;
-  max-width: 375px;
+  max-width: 768px;
   padding: 10px;
 
   box-shadow: 0px -1px 0px rgba(41, 45, 50, 0.1);

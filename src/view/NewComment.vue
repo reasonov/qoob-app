@@ -194,7 +194,7 @@ export default {
   left: 50%;
 
   width: 100%;
-  max-width: 375px;
+  max-width: 768px;
 
   padding: 70px 20px 190px 20px;
   margin: 0 auto;

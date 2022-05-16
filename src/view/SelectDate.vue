@@ -53,6 +53,7 @@ export default {
 
 <style scoped>
 .select-date {
+  max-width: 400px;
   padding-bottom: 235px;
 }
 </style>
