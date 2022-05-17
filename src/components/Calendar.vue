@@ -139,6 +139,10 @@ export default {
           }, 500)
         }
       }
+
+      selectedDay.value = -1;
+      console.log(selectedDay.value)
+
     }
 
     function stopScroll(type) {

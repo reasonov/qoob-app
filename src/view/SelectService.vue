@@ -32,10 +32,11 @@
                   <p class="item__price">{{ service.price }} ₽</p>
 
                   <button :class="['item__add', {'add--active': service.state}]" @click="selectService(service)">
-                  <span :class="['add__wrapper', {'add__wrapper--active': service.state}]">
-                    <span :class="['add__line add__line1', {'line--active': service.state}]"></span>
-                    <span :class="['add__line add__line2', {'line--active': service.state}]"></span>
-                  </span>
+                    <span :class="['add__wrapper', {'add__wrapper--active': service.state}]">
+                      <span class="click-area"></span>
+                      <span :class="['add__line add__line1', {'line--active': service.state}]"></span>
+                      <span :class="['add__line add__line2', {'line--active': service.state}]"></span>
+                    </span>
                   </button>
 
                 </div>
@@ -47,7 +48,7 @@
       </transition>
 
       <transition name="modalAm">
-        <div class="modal-more" v-if="moreState !== -1">
+        <div class="modal-more" v-if="moreState !== -1" @touchstart.prevent>
           <div class="more__header">
             <p class="more__caption">Об услуге</p>
             <p class="more__title">{{ filteredList[moreState].title }}</p>
@@ -175,17 +176,15 @@ export default {
 
 .modal-more {
   position: fixed;
-  left: 50%;
+  left: 0;
   bottom: 0;
   z-index: 5;
 
   width: 100%;
-  max-width: 375px;
   padding: 20px;
 
   border-radius: 30px 30px 0 0;
   box-sizing: border-box;
-  transform: translateX(-50%);
 
   background-color: #fff;
 }
@@ -482,6 +481,14 @@ export default {
 
 .add__line2 {
   transform: rotateZ(90deg);
+}
+
+.click-area {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  bottom: -15px;
+  left: -15px;
 }
 
 .line--active {

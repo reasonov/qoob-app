@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import {ref} from "vue";
+import {ref, watchEffect} from "vue";
 
 export default {
   name: "DropMenu",
@@ -39,6 +39,10 @@ export default {
     list: {
       type: Array,
       required: true
+    },
+    newValue: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props, { emit }) {
@@ -56,6 +60,12 @@ export default {
       emit('selectItem', selectedItem.value);
       toggleMenu();
     }
+
+    watchEffect(() => {
+      if(props.newValue) {
+        selectedItem.value = 'Выбрать'
+      }
+    })
 
     return { selectItem, menuState, toggleMenu, selectedItem }
   }

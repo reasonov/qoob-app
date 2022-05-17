@@ -20,6 +20,7 @@
             class="comment__drop"
             :title="dropTitle"
             :list="dropList2"
+            :newValue="newValue"
             @selectItem="selectItem"
             v-if="dropVal1"
         />
@@ -114,10 +115,18 @@ export default {
 
     const dropVal1 = ref('');
     const dropVal2 = ref('');
+    const newValue = ref(false);
 
     function selectItem(item) {
       if(dropList1.includes(item)) {
         dropVal1.value = item;
+        newValue.value = true;
+
+        setTimeout(() => {
+          newValue.value = false;
+        }, 100);
+
+        console.log(dropVal2.value)
       } else {
         dropVal2.value = item;
       }
@@ -167,6 +176,7 @@ export default {
       dropList1,
       dropVal1,
       dropVal2,
+      newValue,
       selectItem,
       dropTitle,
       dropList2,
