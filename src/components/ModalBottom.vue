@@ -23,6 +23,7 @@ export default {
   position: fixed;
   left: 50%;
   bottom: 0;
+  z-index: 5;
 
   width: 100%;
   max-width: 768px;

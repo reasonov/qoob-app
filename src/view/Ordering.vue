@@ -45,7 +45,10 @@
           <p class="ordering__item-title item__title">Напомнить за</p>
         </div>
         <div class="item__right">
-          <p class="clock-number circle-number">{{ notificationList[selectedNotification] }} часа</p>
+          <p class="clock-number circle-number">
+            {{ notificationList[selectedNotification] }}
+            {{ timeWord }}
+          </p>
           <img src="../assets/img/arrow-right.svg" alt="">
         </div>
       </div>
@@ -72,7 +75,7 @@
 
     <div class="modal-wrapper">
 
-      <div class="modal__background" v-if="orderState"></div>
+      <div class="modal__background" @touchstart.prevent="orderState = false" v-if="orderState"></div>
 
       <modal-bottom class="modal--end" :state="orderState">
         <p class="modal__text1">Поздравляем!</p>
@@ -84,7 +87,7 @@
     <transition name="modalAm">
       <div class="modal-wrapper" v-if="setNotification">
 
-        <div class="modal__background" @click="setNotification = false"></div>
+        <div class="modal__background" @touchstart.prevent="setNotification = false"></div>
 
         <div class="modal--notification">
           <p class="notification__title">Напоминание</p>
@@ -109,7 +112,7 @@
 <script>
 import customCheckboxMain from "@/components/CustomCheckboxMain";
 import ModalBottom from "@/components/ModalBottom";
-import {ref, reactive} from "vue";
+import {ref, reactive, computed} from "vue";
 import {useStore} from "vuex";
 
 export default {
@@ -123,7 +126,7 @@ export default {
     const store = useStore();
 
     const setNotification = ref(false);
-    const notificationList = ['1', '2', '3', '5', '8', '10', '12', '24'];
+    const notificationList = [1, 2, 3, 5, 8, 10, 12, 24];
     const selectedNotification = ref(1);
 
     const agreementState = reactive({first: false, second: false});
@@ -141,6 +144,15 @@ export default {
       store.commit('createRecord');
     }
 
+    const timeWord = computed(() => {
+      if(notificationList[selectedNotification.value] === 1) {
+        return 'час'
+      } else if(notificationList[selectedNotification.value] > 3 && notificationList[selectedNotification.value] < 24) {
+        return 'часов'
+      }
+      return 'часа'
+    })
+
     return {
       store,
       setNotification,
@@ -149,7 +161,8 @@ export default {
       agreementState,
       orderState,
       selectNotification,
-      createOrder
+      createOrder,
+      timeWord
     }
 
   }
@@ -369,6 +382,7 @@ export default {
   position: fixed;
   top: 50%;
   left: 50%;
+  z-index: 5;
 
   width: 100%;
   max-width: 375px;

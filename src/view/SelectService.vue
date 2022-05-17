@@ -70,7 +70,7 @@
       </transition>
 
       <transition name="bgAm">
-        <div class="modal__background" @touchstart="moreState = -1" v-if="moreState !== -1"></div>
+        <div class="modal__background" @touchstart.prevent="moreState = -1" v-if="moreState !== -1"></div>
       </transition>
 
     </div>
@@ -407,6 +407,9 @@ export default {
 }
 
 .item__more {
+  position: relative;
+  z-index: 2;
+
   width: 90px;
   height: 22px;
 

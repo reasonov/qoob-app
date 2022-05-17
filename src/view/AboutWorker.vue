@@ -43,7 +43,7 @@
       </ul>
 
       <modal-bottom class="about__modal">
-        <router-link class="modal__button" to="/select-date" @click="commitData">Записаться</router-link>
+        <router-link class="modal__button" to="/select-date" @click="commitData">Выбрать</router-link>
       </modal-bottom>
 
     </div>

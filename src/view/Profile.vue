@@ -3,34 +3,22 @@
 
     <p class="input__label title--small">Имя</p>
     <div class="input__area">
-      <input type="text" class="profile__input" v-model="profileData.name" :disabled="editItem !== 1">
-      <button class="profile__edit" @click="editItem = 1">
-        <img src="../assets/img/edit.svg" alt="">
-      </button>
+      <input type="text" class="profile__input" v-model="profileData.name">
     </div>
 
     <p class="input__label title--small">Фамилия</p>
     <div class="input__area">
-      <input type="text" class="profile__input" v-model="profileData.lastName" :disabled="editItem !== 2">
-      <button class="profile__edit" @click="editItem = 2">
-        <img src="../assets/img/edit.svg" alt="">
-      </button>
+      <input type="text" class="profile__input" v-model="profileData.lastName">
     </div>
 
     <p class="input__label title--small">Телефон</p>
     <div class="input__area">
-      <input type="text" class="profile__input" v-model="profileData.phone" :disabled="editItem !== 3">
-      <button class="profile__edit" @click="editItem = 3">
-        <img src="../assets/img/edit.svg" alt="">
-      </button>
+      <input type="text" class="profile__input" v-model="profileData.phone">
     </div>
 
     <p class="input__label title--small">Email</p>
     <div class="input__area">
-      <input type="text" class="profile__input" v-model="profileData.email" :disabled="editItem !== 4">
-      <button class="profile__edit" @click="editItem = 4">
-        <img src="../assets/img/edit.svg" alt="">
-      </button>
+      <input type="text" class="profile__input" v-model="profileData.email">
     </div>
 
     <button class="save-button" @click="goBack">Сохранить</button>
@@ -39,14 +27,12 @@
 </template>
 
 <script>
-import {ref, reactive} from "vue";
+import {reactive} from "vue";
 import router from "@/router";
 
 export default {
   name: "Profile",
   setup() {
-
-    const editItem = ref(0);
 
     const profileData = reactive({
       name: '',
@@ -59,7 +45,7 @@ export default {
       router.go(-1);
     }
 
-    return { editItem, profileData, goBack }
+    return { profileData, goBack }
 
   }
 }

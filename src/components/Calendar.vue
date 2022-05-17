@@ -1,11 +1,17 @@
 <template>
-  <div class="calendar" @touchmove.prevent="scrollCalendar" @touchend="stopScroll">
+  <div class="calendar">
     <p class="calendar__month">{{ translateMonth }}</p>
     <ul class="calendar__week">
       <li class="week__item" v-for="item in weekList" :key="item">{{ item }}</li>
     </ul>
 
-    <div class="day-wrapper">
+    <div class="day-wrapper"
+         @touchmove.prevent="scrollCalendar('touch')"
+         @touchend="stopScroll('touch')"
+         @mousedown="mouseDown = true"
+         @mousemove.prevent="scrollCalendar('mouse')"
+         @mouseup="stopScroll('mouse')"
+    >
       <ul :class="[
           'calendar__day',
            {'calendar--animation1': scrollState === 1},
@@ -77,59 +83,70 @@ export default {
     const firstTouch = ref(0);
     const scrollThrow = ref(false);
     const scrollState = ref(0);
+    const mouseDown = ref(false);
 
-    function scrollCalendar(e) {
+    function scrollCalendar(type) {
 
-      if(scrollThrow.value) {
-        return;
-      }
+      if(mouseDown.value && type === 'mouse') {
 
-      if(firstTouch.value === 0) {
-        firstTouch.value = e.touches[0].screenY;
-      } else if(firstTouch.value - e.touches[0].screenY >= 20) {
+        console.log('asd')
 
-        scrollState.value = 1;
+      } else if (type === 'touch') {
+        if(scrollThrow.value) {
+          return;
+        }
 
-        setTimeout(() => {
-          scrollState.value = 2;
-        }, 300)
+        if(firstTouch.value === 0) {
+          firstTouch.value = event.touches[0].screenY;
+        } else if(firstTouch.value - event.touches[0].screenY >= 20) {
 
-        setTimeout(() => {
-          changeMonth('plus');
-          scrollState.value = 3;
-        }, 400)
-
-        firstTouch.value = 0;
-        scrollThrow.value = true;
-
-        setTimeout(() => {
-          scrollState.value = 0;
-        }, 500)
-
-      } else if(firstTouch.value - e.touches[0].screenY <= -20) {
-
-        scrollState.value = 3;
-
-        setTimeout(() => {
-          scrollState.value = 2;
-        }, 300)
-
-        setTimeout(() => {
-          changeMonth('minus');
           scrollState.value = 1;
-        }, 400)
 
-        firstTouch.value = 0;
-        scrollThrow.value = true;
+          setTimeout(() => {
+            scrollState.value = 2;
+          }, 300)
 
-        setTimeout(() => {
-          scrollState.value = 0;
-        }, 500)
+          setTimeout(() => {
+            changeMonth('plus');
+            scrollState.value = 3;
+          }, 400)
+
+          firstTouch.value = 0;
+          scrollThrow.value = true;
+
+          setTimeout(() => {
+            scrollState.value = 0;
+          }, 500)
+
+        } else if(firstTouch.value - event.touches[0].screenY <= -20) {
+
+          scrollState.value = 3;
+
+          setTimeout(() => {
+            scrollState.value = 2;
+          }, 300)
+
+          setTimeout(() => {
+            changeMonth('minus');
+            scrollState.value = 1;
+          }, 400)
+
+          firstTouch.value = 0;
+          scrollThrow.value = true;
+
+          setTimeout(() => {
+            scrollState.value = 0;
+          }, 500)
+        }
       }
     }
 
-    function stopScroll() {
-      scrollThrow.value = false;
+    function stopScroll(type) {
+      if(type === 'mouse') {
+        mouseDown.value = false;
+      } else {
+        scrollThrow.value = false;
+      }
     }
 
     function changeMonth(side) {
@@ -167,6 +184,7 @@ export default {
       scrollCalendar,
       stopScroll,
       scrollState,
+      mouseDown,
       translateMonth
     }
 

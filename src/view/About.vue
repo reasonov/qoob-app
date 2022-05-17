@@ -86,7 +86,7 @@
         <p class="modal__subtitle">Ваш отзыв опубликован!</p>
         <router-link class="modal__button" to="/">На главную</router-link>
       </modal-bottom>
-      <div class="modal__background" v-if="modalState" @click="modalState = false"></div>
+      <div class="modal__background" v-if="modalState" @touchstart.prevent="modalState = false"></div>
     </div>
   </div>
 </template>
